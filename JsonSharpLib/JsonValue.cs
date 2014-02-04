@@ -28,6 +28,9 @@ namespace Cluster.JsonSharpLib
             }
             if (inputSB.ToString().Contains('.'))
                 return new JsonValue(float.Parse(inputSB.ToString(), CultureInfo.InvariantCulture));
+            if (inputSB.ToString() == "true") return new JsonValue(true);
+            if (inputSB.ToString() == "false") return new JsonValue(false);
+            if (inputSB.ToString() == "null") return new JsonValue(null);
             return new JsonValue(long.Parse(inputSB.ToString()));
         }
 
