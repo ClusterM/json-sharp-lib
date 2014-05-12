@@ -15,6 +15,7 @@ namespace JsonTests
             var inputString = @"{
                 ""firstName"":""Иван"",
                 ""lastName"":""Иванов"",
+                ""test"":""test1\ntest2\ntest3"",
                 ""address"":{
                     ""streetAddress"":""Московское ш., 101, кв.101"",
                     ""city"":""Ленинград"",
