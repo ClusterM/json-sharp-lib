@@ -11,6 +11,9 @@ namespace Cluster.JsonSharpLib
         public static JsonObject Parse(string inputString)
         {
             var inputSB = new StringBuilder(inputString.Trim(JsonParser.trimChars));
+            inputSB.Replace("\\n", "\n");
+            inputSB.Replace("\\r", "\r");
+            inputSB.Replace("\\t", "\t");
             if (inputSB.Length > 0 && inputSB[0] == '{') inputSB.Remove(0, 1);
             if (inputSB.Length > 0 && inputSB[inputSB.Length - 1] == '}') inputSB.Remove(inputSB.Length - 1, 1);
             int len = inputSB.Length;
