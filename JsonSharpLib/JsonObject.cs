@@ -11,18 +11,14 @@ namespace Cluster.JsonSharpLib
         public static JsonObject Parse(string inputString)
         {
             var inputSB = new StringBuilder(inputString.Trim(JsonParser.trimChars));
-            inputSB.Replace("\\n", "\n");
-            inputSB.Replace("\\r", "\r");
-            inputSB.Replace("\\t", "\t");
             if (inputSB.Length > 0 && inputSB[0] == '{') inputSB.Remove(0, 1);
             if (inputSB.Length > 0 && inputSB[inputSB.Length - 1] == '}') inputSB.Remove(inputSB.Length - 1, 1);
-            int len = inputSB.Length;
             var result = new JsonObject();
             int startPos = 0;
             int opened1 = 0;
             int opened2 = 0;
             bool quotes = false;
-            for (int pos = 0; pos < len; pos++)
+            for (int pos = 0; pos < inputSB.Length; pos++)
             {
                 char ch = inputSB[pos];
                 if (!quotes)
@@ -58,7 +54,25 @@ namespace Cluster.JsonSharpLib
                     switch (ch)
                     {
                         case '\\':
-                            pos++;
+                            char ch2 = inputSB[pos + 1];
+                            switch(ch2)
+                            {
+                                case 'n':
+                                    inputSB.Remove(pos, 2);
+                                    inputSB.Insert(pos, '\n');
+                                    break;
+                                case 'r':
+                                    inputSB.Remove(pos, 2);
+                                    inputSB.Insert(pos, '\r');
+                                    break;
+                                case 't':
+                                    inputSB.Remove(pos, 2);
+                                    inputSB.Insert(pos, '\t');
+                                    break;
+                                case '"':
+                                    pos++;
+                                    break;
+                            }
                             break;
                         case '"':
                             quotes = false;

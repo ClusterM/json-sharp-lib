@@ -37,7 +37,7 @@ namespace Cluster.JsonSharpLib
         public string Encode()
         {
             if (Value is string)
-                return '"' + ((string)Value).Replace("\\", "\\\\").Replace("\"", @"\""") + '"';
+                return '"' + ((string)Value).Replace("\\", "\\\\").Replace("\"", @"\""").Replace("\n","\\n").Replace("\r","\\r").Replace("\t","\\t") + '"';
             return Value.ToString();
         }
 
