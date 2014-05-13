@@ -69,7 +69,7 @@ namespace Cluster.JsonSharpLib
                                     inputSB.Remove(pos, 2);
                                     inputSB.Insert(pos, '\t');
                                     break;
-                                case '"':
+                                default:
                                     pos++;
                                     break;
                             }
